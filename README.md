@@ -5,6 +5,11 @@
 
 <br/>
 
+## Setup
+<div align=center>
+    <img src='./assets/screenshot.png'/>
+</div>
+
 ## Specs
 - OS → Arch Linux
 - WM → XMonad
@@ -15,3 +20,4 @@
 - EDITOR → Vscode
 - APP MENU → dmenu
 - SHELL → zsh starship prompt
+
