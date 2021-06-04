@@ -50,7 +50,8 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.ThreeColumns
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.SimplestFloat
-
+import XMonad.Layout.ResizableTile
+import XMonad.Layout.Tabbed
 
 -------------------------------------------------------------------
 ------                 LAYOUTS MODIFIERS                     ------
@@ -84,10 +85,10 @@ myAltTerminal :: String
 myAltTerminal = "kitty"
 
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = False
+myFocusFollowsMouse = True
 
 myClickJustFocuses :: Bool
-myClickJustFocuses = True
+myClickJustFocuses = False
 
 --myBorderWidth :: Dimension
 myBorderWidth = 3
@@ -137,7 +138,8 @@ myLayout = mouseResize $ windowArrange  $ mkToggle (NBFULL ?? FULL ?? EOT) $ avo
            tall         ||| 
            grid         |||
            mirror       |||
-           threeCol 
+           threeCol     |||
+           simplestFloat
            )            ||| 
            noBorders Full
 
@@ -167,6 +169,7 @@ myLayout = mouseResize $ windowArrange  $ mkToggle (NBFULL ?? FULL ?? EOT) $ avo
                $ mySpacing 8
                $ ThreeCol 1 (3/100) (1/2)
 
+
 windowCount :: X (Maybe String)
 windowCount =
   gets
@@ -189,6 +192,8 @@ myManageHook = composeAll
     , className =? "notion"           --> doFloat
     , className =? "alacritty"        --> doFloat
     , className=? "Notion"            --> doFloat
+    , className=? "dialog"            --> doCenterFloat
+    , className=? "download"          --> doCenterFloat
     ]
        <+>composeOne
     [
@@ -214,7 +219,9 @@ myLogHook = return ()
 myStartupHook = do
     spawnOnce "xset b off"
     spawnOnce "~/.fehbg &"
-    spawnOnce "picom -b &"
+    spawnOnce "env LC_ALL=en_US.UTF-8 /usr/bin/dunst"
+    --spawnOnce "picom -b &"
+    spawnOnce "picom -b --config ~/.config/picom.conf"
     spawnOnce "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype request  --transparent true --alpha 55 --tint 0x000000  --height 22 --monitor 0 --iconspacing 2 &"
     setDefaultCursor xC_left_ptr
 
