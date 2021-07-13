@@ -1,15 +1,15 @@
-Config { font = "xft:JetBrainsMono Nerd Font:size=9:weight=bold:antialias=true:hinting=true"
+Config { font = "xft:Fira Code:size=9:weight=bold:antialias=true:hinting=true"
        , additionalFonts = [ "xft:Ubuntu Mono Ligaturized:pixelsize=10:antialias=true:hinting=true"
                            , "xft:JetBrainsMono Nerd Font:pixelsize=10:antialias=true:hinting=true"
                            , "xft:JetBrainsMono Nerd Font:pixelsize=15:antialias=true:hinting=true"
                            ]
        , borderColor = "#011627"
        , border = NoBorder
-       , bgColor = "#011627"
+       , bgColor = "#111111"
        , fgColor = "#bbc2cf"
-       , alpha = 190
-       --, position = TopSize C 98 25
-       , position = Static { xpos = 2 , ypos = 4, width = 1915, height = 25 }
+       , alpha = 255
+       , position = TopSize C 100 25
+       --, position = Static { xpos = 2 , ypos = 4, width = 1915, height = 25 }
        , textOffset = -1
        , iconOffset = -1
        , lowerOnStart = True
@@ -73,6 +73,6 @@ Config { font = "xft:JetBrainsMono Nerd Font:size=9:weight=bold:antialias=true:h
        , sepChar = "%"
        , alignSep = "}{"
        , template = " <icon=haskell_20.xpm/> <fc=#98be65><fn=3>  </fn></fc>  <fn=1>|</fn> %StdinReader% }\
-                    \{ <fc=#ff6c6b>%cpu%</fc>  <fn=1>|</fn>  <fc=#98be65>%memory%</fc>  <fn=1>|</fn>  <fc=#ecbe7b>%wlan1%</fc>  <fn=1>|</fn>  <fc=#51afef>%KRNO%</fc>  <fn=1>|</fn>  <fc=#46d9ff><fn=3> </fn>%date%</fc> <fn=1>|</fn> <fc=#98be65><fn=3> </fn>%battery%  </fc>"
+                    \{ <fc=#ff6c6b>%cpu%</fc>  <fn=1>|</fn>  <fc=#98be65>%memory%</fc>  <fn=1>|</fn>  <fc=#ecbe7b>%wlan1%</fc>  <fn=1>|</fn> <fc=#46d9ff><fn=3> </fn>%date%</fc> <fn=1>|</fn> <fc=#98be65><fn=3> </fn>%battery%  </fc> <fn=1>|</fn>           "
        }
 
