@@ -10,14 +10,6 @@ export ZSH="/home/rishit/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
-# Aliases
-alias v="nvim"
-
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -107,6 +99,26 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+
+# custom exports
+export EDITOR='nvim'
+export TERMINAL='kitty'
+export BROWSER='firefox'
+export MANPAGER='nvim +Man!'
+
+# custom aliases
+alias v="nvim"
+alias f="ranger"
+alias pac="sudo pacman"
+alias sz="source ~/.zshrc"
+alias weather="clear && curl wttr.in"
+
+# nvm exports
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+# starship export
 eval "$(starship init zsh)"
-[ -f "/home/rishit/.ghcup/env" ] && source "/home/rishit/.ghcup/env" # ghcup-env
-source ".cabal/bin"
