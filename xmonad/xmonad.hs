@@ -79,10 +79,10 @@ import XMonad.Actions.CopyWindow (kill1)
 -------------------- # Variables Section # ------------------------    
 myTerminal :: String
 --myTerminal = "kitty"
-myTerminal = "alacritty"
+myTerminal = "kitty"
 
 myAltTerminal :: String
-myAltTerminal = "kitty"
+myAltTerminal = "alacritty"
 
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
@@ -94,9 +94,9 @@ myClickJustFocuses = False
 myBorderWidth = 3
 
 myNormalBorderColor :: String
-myNormalBorderColor = "#a89884"
+myNormalBorderColor = "#38343f"
 myFocusedBorderColor :: String
-myFocusedBorderColor = "#c678dd"
+myFocusedBorderColor = "#38343f"
 
 myModMask :: KeyMask
 myModMask = mod4Mask
@@ -127,7 +127,7 @@ myshowWNameTheme = def
     {
         swn_font    = "xft: JetBrainsMono Nerd Font:bold:size=60:antialias=true:hinting=true"
     ,   swn_fade    = 0.7
-    ,   swn_bgcolor = "#191c21"
+    ,   swn_bgcolor = "#111111"
     ,   swn_color   = "#51afef"
     }
 
@@ -148,7 +148,7 @@ myLayout = mouseResize $ windowArrange  $ mkToggle (NBFULL ?? FULL ?? EOT) $ avo
                $ smartBorders
                $ windowNavigation 
                $ subLayout [] (smartBorders Simplest)
-               $ mySpacing 8 
+               $ mySpacing 10 
                $ ResizableTall 1 (3/100) (1/2) [] 
 
     grid     = renamed [Replace "Grid"] 
@@ -222,7 +222,7 @@ myStartupHook = do
     spawnOnce "env LC_ALL=en_US.UTF-8 /usr/bin/dunst"
     --spawnOnce "picom -b &"
     spawnOnce "picom -b --config ~/.config/picom.conf"
-    spawnOnce "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype request  --transparent true --alpha 55 --tint 0x000000  --height 22 --monitor 0 --iconspacing 2 &"
+    spawnOnce "stalonetray --geometry 1x1-17+3 --max-geometry 10x1-17+5 --transparent --tint-color '#111111' --tint-level 255 --grow-gravity NE --icon-gravity NW --icon-size 20 --sticky --window-type dock --window-strut top --skip-taskbar"
     setDefaultCursor xC_left_ptr
 
 -------------------------------------------------------------------
@@ -266,7 +266,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ,   ((modm .|. controlMask, xK_t), sendMessage ToggleStruts)
     ,   ((modm .|. shiftMask, xK_f), sendMessage $ Toggle NBFULL)
     ,   ((controlMask,     xK_q), io (exitWith ExitSuccess))
-    ,   ((modm .|. shiftMask, xK_r), spawn "xmonad --recompile; xmonad --restart")
+    ,   ((modm .|. shiftMask, xK_s), spawn "xmonad --recompile; xmonad --restart")
     ,   ((modm .|. shiftMask, xK_slash), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
     ]
     ++
