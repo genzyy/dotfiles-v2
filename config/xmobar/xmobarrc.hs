@@ -1,4 +1,4 @@
-Config { font = "xft:Fira Code:size=9:weight=bold:antialias=true:hinting=true"
+Config { font = "xft:Google Sans:weight=bold:size=10:antialias=true:hinting=true"
        , additionalFonts = [ "xft:Ubuntu Mono Ligaturized:pixelsize=10:antialias=true:hinting=true"
                            , "xft:JetBrainsMono Nerd Font:pixelsize=10:antialias=true:hinting=true"
                            , "xft:JetBrainsMono Nerd Font:pixelsize=15:antialias=true:hinting=true"

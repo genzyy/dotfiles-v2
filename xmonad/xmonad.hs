@@ -52,6 +52,7 @@ import XMonad.Layout.ResizableTile
 import XMonad.Layout.SimplestFloat
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Tabbed
+import XMonad.Layout.DraggingVisualizer (draggingVisualizer)
 
 -------------------------------------------------------------------
 ------                 LAYOUTS MODIFIERS                     ------
@@ -162,6 +163,7 @@ myLayout = mouseResize $ windowArrange  $ mkToggle (NBFULL ?? FULL ?? EOT) $ avo
     tall     = renamed [Replace "Tall"] 
                $ smartBorders
                $ windowNavigation 
+               $ draggingVisualizer
                $ subLayout [] (smartBorders Simplest)
                $ mySpacing 10 
                $ ResizableTall 1 (3/100) (1/2) [] 
