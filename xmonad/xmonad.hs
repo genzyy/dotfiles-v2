@@ -66,6 +66,8 @@ import XMonad.Layout.Simplest
 import XMonad.Layout.SubLayouts
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
+import XMonad.Layout.SimpleDecoration (shrinkText)
+import XMonad.Layout.Tabbed (tabbed)
 -------------------------------------------------------------------
 ------                         ACTIONS                       ------
 -------------------------------------------------------------------
@@ -125,7 +127,7 @@ clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
 myshowWNameTheme :: SWNConfig
 myshowWNameTheme = def
     {
-        swn_font    = "xft: JetBrainsMono Nerd Font:bold:size=60:antialias=true:hinting=true"
+        swn_font    = "xft: Fira Code:bold:size=60:antialias=true:hinting=true"
     ,   swn_fade    = 0.7
     ,   swn_bgcolor = "#111111"
     ,   swn_color   = "#51afef"
@@ -134,6 +136,18 @@ myshowWNameTheme = def
 mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
 mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 
+myTabConfig = def { activeColor = "#556064"
+                  , inactiveColor = "#2F3D44"
+                  , urgentColor = "#FDF6E3"
+                  , activeBorderColor = "#454948"
+                  , inactiveBorderColor = "#454948"
+                  , urgentBorderColor = "#268BD2"
+                  , activeTextColor = "#80FFF9"
+                  , inactiveTextColor = "#1ABC9C"
+                  , urgentTextColor = "#1ABC9C"
+                  , fontName = "xft:Fira Code:size=10:antialias=true"
+                  }
+
 myLayout = mouseResize $ windowArrange  $ mkToggle (NBFULL ?? FULL ?? EOT) $ avoidStruts  (
            tall         ||| 
            grid         |||
@@ -141,7 +155,8 @@ myLayout = mouseResize $ windowArrange  $ mkToggle (NBFULL ?? FULL ?? EOT) $ avo
            threeCol     |||
            simplestFloat
            )            ||| 
-           noBorders Full
+           noBorders Full |||
+           noBorders (tabbed shrinkText myTabConfig)
 
   where 
     tall     = renamed [Replace "Tall"] 
