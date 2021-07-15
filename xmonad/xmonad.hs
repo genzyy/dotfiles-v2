@@ -48,10 +48,13 @@ import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, manageDocks, Toggl
 import XMonad.Layout.Grid
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ThreeColumns
+import XMonad.Layout.CenteredMaster
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.SimplestFloat
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Tabbed
+import XMonad.Layout.Accordion
+import XMonad.Layout.Spiral
 import XMonad.Layout.DraggingVisualizer (draggingVisualizer)
 
 -------------------------------------------------------------------
@@ -69,6 +72,7 @@ import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.SimpleDecoration (shrinkText)
 import XMonad.Layout.Tabbed (tabbed)
+import XMonad.Layout.LimitWindows (limitWindows, increaseLimit, decreaseLimit)
 -------------------------------------------------------------------
 ------                         ACTIONS                       ------
 -------------------------------------------------------------------
@@ -88,13 +92,13 @@ myAltTerminal :: String
 myAltTerminal = "alacritty"
 
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = True
+myFocusFollowsMouse = False
 
 myClickJustFocuses :: Bool
-myClickJustFocuses = False
+myClickJustFocuses = True
 
 --myBorderWidth :: Dimension
-myBorderWidth = 3
+myBorderWidth = 1
 
 myNormalBorderColor :: String
 myNormalBorderColor = "#38343f"
@@ -113,7 +117,8 @@ dmenu_con = "env LC_ALL=en_US.UTF-8 dmenu_run -b -fn 'JetBrainsMono Nerd Font-10
 myWorkspaces = ["www", "dev", "home", "files", "music"]
 
 -----------  make your workspace on xmobar clickable ------------
-myWorkspacesIndices = M.fromList $ zipWith (,) myWorkspaces [1..] 
+--myWorkspacesIndices = M.fromList $ zipWith (,) myWorkspaces [1..] 
+myWorkspacesIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
 
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
     where i = fromJust $ M.lookup ws myWorkspacesIndices
@@ -151,15 +156,24 @@ myTabConfig = def { activeColor = "#556064"
 
 myLayout = mouseResize $ windowArrange  $ mkToggle (NBFULL ?? FULL ?? EOT) $ avoidStruts  (
            tall         ||| 
+           centermaster  |||
            grid         |||
            mirror       |||
            threeCol     |||
-           simplestFloat
+           simplestFloat |||
+           tallAccordion |||
+           wideAccordion 
            )            ||| 
-           noBorders Full |||
-           noBorders (tabbed shrinkText myTabConfig)
+           noBorders Full
 
   where 
+    centermaster = renamed [Replace "centermaster"]
+               $ smartBorders
+               $ windowNavigation
+               $ mySpacing 8
+               $ centerMaster Grid
+
+
     tall     = renamed [Replace "Tall"] 
                $ smartBorders
                $ windowNavigation 
@@ -186,6 +200,12 @@ myLayout = mouseResize $ windowArrange  $ mkToggle (NBFULL ?? FULL ?? EOT) $ avo
                $ mySpacing 8
                $ ThreeCol 1 (3/100) (1/2)
 
+    tallAccordion  = renamed [Replace "tallAccordion"]
+               $ Accordion
+
+    wideAccordion  = renamed [Replace "wideAccordion"]
+               $ Mirror Accordion
+
 
 windowCount :: X (Maybe String)
 windowCount =
@@ -211,6 +231,13 @@ myManageHook = composeAll
     , className=? "Notion"            --> doFloat
     , className=? "dialog"            --> doCenterFloat
     , className=? "download"          --> doCenterFloat
+    , className=? "confirm"           --> doCenterFloat
+    , className=? "toolbar"           --> doCenterFloat
+    , className=? "notification"      --> doFloat
+    , className=? "firefox"           --> doShift (myWorkspaces !! 1)
+    , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat
+    , className=? "google-chrome-stable" --> doShift (myWorkspaces !! 1)
+    , className=? "Postman"           --> doCenterFloat
     ]
        <+>composeOne
     [
@@ -238,6 +265,8 @@ myStartupHook = do
     spawnOnce "~/.fehbg &"
     spawnOnce "env LC_ALL=en_US.UTF-8 /usr/bin/dunst"
     --spawnOnce "picom -b &"
+    spawnOnce "lxsession"
+    spawnOnce "volumeicon"
     spawnOnce "picom -b --config ~/.config/picom.conf"
     spawnOnce "stalonetray --geometry 1x1-17+3 --max-geometry 10x1-17+5 --transparent --tint-color '#111111' --tint-level 255 --grow-gravity NE --icon-gravity NW --icon-size 20 --sticky --window-type dock --window-strut top --skip-taskbar"
     setDefaultCursor xC_left_ptr

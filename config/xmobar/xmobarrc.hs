@@ -1,4 +1,4 @@
-Config { font = "xft:Google Sans:weight=bold:size=10:antialias=true:hinting=true"
+Config { font = "xft:mononoki Nerd Font Mono:weight=bold:size=9:antialias=true:hinting=true"
        , additionalFonts = [ "xft:Ubuntu Mono Ligaturized:pixelsize=10:antialias=true:hinting=true"
                            , "xft:JetBrainsMono Nerd Font:pixelsize=10:antialias=true:hinting=true"
                            , "xft:JetBrainsMono Nerd Font:pixelsize=15:antialias=true:hinting=true"
@@ -47,9 +47,6 @@ Config { font = "xft:Google Sans:weight=bold:size=10:antialias=true:hinting=true
                          , "--high", "#ff6c6b", "--low", "#4db5bd"]
                          600
                     , Run Cpu ["-t", "<fn=3> </fn> <total>%"] 10
-                    , Run Network "wlan1" ["-t", "<fn=3>歷 </fn> <fn=3> </fn><rx>K <fn=3> </fn><tx>K"
-                                            , "-L","0","-H","10000000"
-                                            , "--normal","#ecbe7b","--high","#ff6c6b"] 10
                     , Run Memory ["-t", "<fn=3> </fn><used>M (<usedratio>%)"] 20
                     , Run Com "kernel" [""] "" 36000
                     , Run Date "%a, %d %B | %H:%M" "date" 10
@@ -73,6 +70,6 @@ Config { font = "xft:Google Sans:weight=bold:size=10:antialias=true:hinting=true
        , sepChar = "%"
        , alignSep = "}{"
        , template = " <icon=haskell_20.xpm/> <fc=#98be65><fn=3>  </fn></fc>  <fn=1>|</fn> %StdinReader% }\
-                    \{ <fc=#ff6c6b>%cpu%</fc>  <fn=1>|</fn>  <fc=#98be65>%memory%</fc>  <fn=1>|</fn>  <fc=#ecbe7b>%wlan1%</fc>  <fn=1>|</fn> <fc=#46d9ff><fn=3> </fn>%date%</fc> <fn=1>|</fn> <fc=#98be65><fn=3> </fn>%battery%  </fc> <fn=1>|</fn>           "
+                    \{ <fc=#ff6c6b>%cpu%</fc>  <fn=1>|</fn>  <fc=#98be65>%memory%</fc>  <fn=1>|</fn> <fc=#46d9ff><fn=3> </fn>%date%</fc> <fn=1>|</fn> <fc=#98be65><fn=3> </fn>%battery%  </fc> <fn=1>|</fn>           "
        }
 
