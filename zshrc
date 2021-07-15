@@ -113,6 +113,8 @@ alias f="ranger"
 alias pac="sudo pacman"
 alias sz="source ~/.zshrc"
 alias weather="clear && curl wttr.in"
+alias suck="sudo make clean install"
+alias rh="sudo rm -r config.h"
 
 # nvm exports
 export NVM_DIR="$HOME/.nvm"
