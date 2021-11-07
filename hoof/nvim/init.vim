@@ -28,6 +28,10 @@ Plug 'nvim-lua/plenary.nvim'
 
 Plug 'nvim-telescope/telescope.nvim'
 
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+Plug 'windwp/nvim-ts-autotag'
+
 Plug 'arzg/vim-colors-xcode'
 
 Plug 'tkztmk/vim-vala'
@@ -193,3 +197,24 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'default'
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  autotag = {
+    enable = true,
+    filetypes = { "html" },
+  }
+}
+vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics,
+    {
+        underline = true,
+        virtual_text = {
+            spacing = 5,
+            severity_limit = 'Warning',
+        },
+        update_in_insert = true,
+    }
+)
+
+EOF
