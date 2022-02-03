@@ -116,6 +116,12 @@ alias weather="clear && curl wttr.in"
 alias suck="sudo make clean install"
 alias rh="sudo rm -r config.h"
 
+# use vim keys to navigate in autocompletion options
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -v '^?' backward-delete-char
 # nvm exports
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
